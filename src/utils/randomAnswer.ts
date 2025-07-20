@@ -6,18 +6,18 @@ import allAnswers, {
 import { answerObject, Err } from "@/data/types";
 
 /**
- * @param {Array} Arr Source array to select a random element from.
+ * @param {Array} SrcArr Source array to select a random element from.
  *
- * @returns {unknown} Random element with any type of the source array.
+ * @returns {unknown} Random element with the type of the elements of source array .
  */
-export function randomElement(Arr: Array<unknown>): unknown {
-	if (!Arr)
+export function randomElement(SrcArr: Array<unknown>): unknown {
+	if (!SrcArr)
 		throw new Err({
 			type: "SERV_ERR",
 			message: "No array specified to get a random element from.",
-			cause: "randomElement() on /utils/functions.ts"
+			cause: "randomElement() on /src/utils/randomAnswer.ts"
 		});
-	else return Arr[Math.floor(Math.random() * Arr.length)];
+	else return SrcArr[Math.floor(Math.random() * SrcArr.length)];
 }
 
 /**
