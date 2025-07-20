@@ -1,11 +1,8 @@
-"use server";
-
 import { NextRequest } from "next/server";
-
 import { randomAnswer } from "@/utils/randomAnswer";
 import { Err } from "@/data/types";
-import { failOptions, successOptions } from "@/app/(api)/api/v1/headers";
-import { errorJSON, getAnswerJSON } from "@/app/(api)/api/v1/responses";
+import { failOptions, successOptions } from "@/app/v1/headers";
+import { errorJSON, getAnswerJSON } from "@/app/v1/responses";
 
 /**
  * @example ```/getAnswer?type=negative```

@@ -1,10 +1,9 @@
 import { NextRequest } from "next/server";
-
 import allAnswers from "@/data/answers";
 import { Err } from "@/data/types";
 import { getAnswerByID } from "@/utils/randomAnswer";
-import { failOptions, successOptions } from "@/app/(api)/api/v1/headers";
-import { errorJSON, getAnswerJSON } from "@/app/(api)/api/v1/responses";
+import { failOptions, successOptions } from "@/app/v1/headers";
+import { errorJSON, getAnswerJSON } from "@/app/v1/responses";
 
 export async function GET(
 	req: NextRequest,

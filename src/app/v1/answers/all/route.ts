@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
-import { failOptions, successOptions } from "@/app/(api)/api/v1/headers";
-import { errorJSON } from "@/app/(api)/api/v1/responses";
-import { getTypeAnswers } from "@/app/(api)/api/v1/functions";
+import { failOptions, successOptions } from "@/app/v1/headers";
+import { errorJSON } from "@/app/v1/responses";
+import { getTypeAnswers } from "@/app/v1/functions";
 import { getTypeLength } from "@/data/answers";
 import { answerType, answerTypes, Err } from "@/data/types";
 
