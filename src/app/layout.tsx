@@ -14,11 +14,21 @@ export const metadata: Metadata = {
 		type: "website",
 		url: "https://api.8.alialmasi.ir",
 		title: "8-Magic API",
-		description: "A clairvoyant piece of API | Part of the 8-Magic project",
+		description:
+			"A clairvoyant piece of API // Part of the 8-Magic project // 8.alialmasi.ir",
 		siteName: "8-Magic API",
-		images: [{ url: "https://api.8.alialmasi.ir/ogp" }]
+		images: [
+			{
+				url: "https://api.8.alialmasi.ir/ogp",
+				width: 1200,
+				height: 630
+			}
+		]
 	},
-	description: "A clairvoyant piece of API | Part of the 8-magic project",
+	twitter: {
+		site: "@al1almasi"
+	},
+	description: "A clairvoyant piece of API // Part of the 8-magic project",
 	creator: "Ali Almasi",
 	authors: [{ name: "Ali Almasi", url: "https://alialmasi.ir" }],
 	formatDetection: {

@@ -1,7 +1,9 @@
 "use client";
+import { randomAnswer } from "@/utils/randomAnswer";
 import { usePathname } from "next/navigation";
 
-export default function BackButton() {
+export default function BackButton(): React.ReactNode {
+	const answer = randomAnswer();
 	return usePathname() !== "/" ? (
 		<button
 			onClick={() => window.history.back()}
@@ -10,6 +12,8 @@ export default function BackButton() {
 			Go back
 		</button>
 	) : (
-		""
+		<p className="text-stone-400">
+			{answer.emoji} {answer.answer}
+		</p>
 	);
 }
