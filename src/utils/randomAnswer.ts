@@ -3,7 +3,7 @@ import allAnswers, {
 	neutralAnswers,
 	positiveAnswers
 } from "@/data/answers";
-import { answerObject, Err } from "@/data/types";
+import { answerObject, answerType, Err } from "@/data/types";
 
 /**
  * @param {Array} SrcArr Source array to select a random element from.
@@ -21,13 +21,13 @@ export function randomElement(SrcArr: Array<unknown>): unknown {
 }
 
 /**
- * @param {string} reqType (Default: all) Specifies the type of the random answer you'll get.
+ * @param {answerType | string} reqType (Default: all) Specifies the type of the random answer you'll get.
  *
  * @returns {answerObject} A random answer-object with the answer and type.
  *
  * @see `/src/data/answers.ts` for the list of answers.
  */
-export function randomAnswer(reqType?: string): answerObject {
+export function randomAnswer(reqType?: answerType | string): answerObject {
 	switch (reqType) {
 		case "positive":
 			return randomElement(positiveAnswers) as answerObject;
