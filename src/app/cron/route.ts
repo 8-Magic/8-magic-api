@@ -17,10 +17,6 @@ export async function GET(): Promise<NextResponse> {
 			{
 				timestamp: new Date().toISOString(),
 				status: db.status,
-				supabase: {
-					status: db.statusText,
-					count: db.count
-				}
 			},
 			null,
 			2
