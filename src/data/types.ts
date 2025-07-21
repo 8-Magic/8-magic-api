@@ -38,22 +38,26 @@ export class Err extends Error {
 	message: string;
 	cause?: string;
 	code?: ErrorCodes;
+	details?: string;
 
 	constructor({
 		type,
 		message,
 		cause,
-		code
+		code,
+		details
 	}: {
 		type: ErrorType;
 		message: string;
 		cause?: string;
 		code?: ErrorCodes;
+		details?: string;
 	}) {
 		super();
 		this.type = type;
 		this.message = message;
 		this.cause = cause;
 		this.code = code;
+		this.details = details;
 	}
 }

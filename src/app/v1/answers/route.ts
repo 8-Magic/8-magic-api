@@ -1,17 +1,17 @@
 import { NextRequest } from "next/server";
 import { randomAnswer } from "@/utils/randomAnswer";
-import { Err } from "@/data/types";
+import { answerType, Err } from "@/data/types";
 import { failOptions, successOptions } from "@/app/v1/headers";
 import { errorJSON, getAnswerJSON } from "@/app/v1/responses";
 
 /**
- * @example ```/getAnswer?type=negative```
+ * @example ```/answers?type=negative```
  *
- * @example ```/getAnswer?t=negative```
+ * @example ```/answers?t=negative```
  */
 export async function GET(req: NextRequest): Promise<Response> {
 	try {
-		const reqType: string =
+		const reqType: answerType | string =
 			new URL(req.url).searchParams.get("type")?.trim()?.toLowerCase() ||
 			new URL(req.url).searchParams.get("t")?.trim()?.toLowerCase() ||
 			"";

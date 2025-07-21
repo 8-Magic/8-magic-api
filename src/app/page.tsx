@@ -20,6 +20,10 @@ export default function Page() {
 				https://api.8.alialmasi.ir/v1
 			</Link>
 			<p>
+				Version 2 is also in development. In this version we&apos;re using
+				Supabase as an external database.
+			</p>
+			<p>
 				If you encountered any unexpected behavior (aka bugs), I&apos;ll be
 				happy to check them out on{" "}
 				<Link

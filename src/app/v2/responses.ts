@@ -1,5 +1,6 @@
-import { answerObject, Err } from "@/data/types";
+import { Err } from "@/data/types";
 import { errorCodeToText } from "./headers";
+import { DBanswerType } from "@/utils/supabaseClient";
 
 /**
  *
@@ -7,13 +8,14 @@ import { errorCodeToText } from "./headers";
  * @returns {string} JSON string response containing details about error.
  */
 export function errorJSON(error: unknown): string {
-	const { type, message, cause, code } = error as Err;
+	const { type, message, cause, code, details } = error as Err;
 	return JSON.stringify(
 		{
 			status: "fail",
 			"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
 			type,
 			message: message || "An unknown error occurred",
+			details,
 			cause
 		},
 		null,
@@ -25,8 +27,8 @@ export function getAnswerJSON({
 	id,
 	answer,
 	type,
-	emoji
-}: answerObject): string {
+	count
+}: DBanswerType): string {
 	return JSON.stringify(
 		{
 			status: "success",
@@ -34,8 +36,8 @@ export function getAnswerJSON({
 				answer: {
 					id,
 					answer,
-					emoji,
-					type
+					type,
+					count
 				}
 			}
 		},
