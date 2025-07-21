@@ -6,10 +6,18 @@ export default function BackButton(): React.ReactNode {
 	const answer = randomAnswer();
 	return usePathname() !== "/" ? (
 		<button
-			onClick={() => window.history.back()}
+			onClick={() =>
+				(window.location.href =
+					"/" +
+					window.location.pathname
+						.split("/")
+						.filter(Boolean)
+						.slice(0, -1)
+						.join("/"))
+			}
 			className="before:content-['<-'] before:absolute before:text-stone-200 relative before:left-2 pl-8 px-2 py-2 hover:text-stone-900 hover:before:text-stone-900 hover:bg-stone-200 text-left cursor-pointer border-1 w-fit"
 		>
-			Go back
+			Go Up
 		</button>
 	) : (
 		<p className="text-stone-400">
