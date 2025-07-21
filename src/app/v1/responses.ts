@@ -8,13 +8,17 @@ import { errorCodeToText } from "./headers";
  */
 export function errorJSON(error: unknown): string {
 	const { type, message, cause, code } = error as Err;
-	return JSON.stringify({
-		status: "fail",
-		"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
-		type,
-		message: message || "An unknown error occurred",
-		cause
-	});
+	return JSON.stringify(
+		{
+			status: "fail",
+			"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
+			type,
+			message: message || "An unknown error occurred",
+			cause
+		},
+		null,
+		2
+	);
 }
 
 export function getAnswerJSON({
@@ -23,15 +27,19 @@ export function getAnswerJSON({
 	type,
 	emoji
 }: answerObject): string {
-	return JSON.stringify({
-		status: "success",
-		data: {
-			answer: {
-				id,
-				answer,
-				emoji,
-				type
+	return JSON.stringify(
+		{
+			status: "success",
+			data: {
+				answer: {
+					id,
+					answer,
+					emoji,
+					type
+				}
 			}
-		}
-	});
+		},
+		null,
+		2
+	);
 }

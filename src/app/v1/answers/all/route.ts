@@ -35,14 +35,18 @@ export async function GET(req: NextRequest): Promise<Response> {
 			});
 
 		return new Response(
-			JSON.stringify({
-				status: "success",
-				data: {
-					type,
-					number: number !== 0 ? number : getTypeLength(type),
-					answers: getTypeAnswers(type, number)
-				}
-			}),
+			JSON.stringify(
+				{
+					status: "success",
+					data: {
+						type,
+						number: number !== 0 ? number : getTypeLength(type),
+						answers: getTypeAnswers(type, number)
+					}
+				},
+				null,
+				2
+			),
 			successOptions("Got the answers")
 		);
 	} catch (error: unknown) {
