@@ -13,7 +13,7 @@ export async function GET(): Promise<NextResponse> {
 	const token = process.env.TG_BOT;
 	const chatId = process.env.TG_CHAT_ID;
 	try {
-		const status = (await supabase.from("answers").select("*")).status;
+		const db = await supabase.from("answers").select("*");
 
 		if ((await supabase.from("answers").select("*")).error)
 			throw new Error("Supabase client faced an error");
@@ -29,7 +29,8 @@ export async function GET(): Promise<NextResponse> {
 					chat_id: chatId,
 					text: {
 						timestamp: new Date().toISOString(),
-						status
+						status: db.status,
+						db
 					}
 				})
 			}
