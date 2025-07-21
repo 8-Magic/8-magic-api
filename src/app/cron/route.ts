@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { Database } from "@/data/database.types";
-
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 export async function GET(): Promise<NextResponse> {
@@ -14,9 +13,23 @@ export async function GET(): Promise<NextResponse> {
 	const chatId = process.env.TG_CHAT_ID;
 	try {
 		const db = await supabase.from("answers").select("*");
+		const text = JSON.stringify(
+			{
+				timestamp: new Date().toISOString(),
+				status: db.status,
+				supabase: {
+					status: db.statusText,
+					count: db.count
+				}
+			},
+			null,
+			2
+		);
 
-		if ((await supabase.from("answers").select("*")).error)
-			throw new Error("Supabase client faced an error");
+		if (db.error)
+			throw new Error(
+				`${db.error.code}: ${db.error.message}: ${db.error.details}`
+			);
 
 		const res = await fetch(
 			`https://api.telegram.org/bot${token}/sendMessage`,
@@ -27,11 +40,7 @@ export async function GET(): Promise<NextResponse> {
 				},
 				body: JSON.stringify({
 					chat_id: chatId,
-					text: {
-						timestamp: new Date().toISOString(),
-						status: db.status,
-						db
-					}
+					text
 				})
 			}
 		);
@@ -48,6 +57,14 @@ export async function GET(): Promise<NextResponse> {
 
 		return NextResponse.json({ success: true });
 	} catch (error: unknown) {
+		const text = JSON.stringify(
+			{
+				timestamp: new Date().toISOString(),
+				error
+			},
+			null,
+			2
+		);
 		const res = await fetch(
 			`https://api.telegram.org/bot${token}/sendMessage`,
 			{
@@ -57,10 +74,7 @@ export async function GET(): Promise<NextResponse> {
 				},
 				body: JSON.stringify({
 					chat_id: chatId,
-					text: {
-						timestamp: new Date().toISOString(),
-						error
-					}
+					text
 				})
 			}
 		);

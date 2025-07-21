@@ -18,17 +18,17 @@ export type Database = {
 				Row: {
 					answer: string;
 					id: number;
-					type: string;
+					type: Database["public"]["Enums"]["answerTypes"];
 				};
 				Insert: {
-					answer: string;
+					answer?: string;
 					id?: number;
-					type: string;
+					type: Database["public"]["Enums"]["answerTypes"];
 				};
 				Update: {
 					answer?: string;
 					id?: number;
-					type?: string;
+					type?: Database["public"]["Enums"]["answerTypes"];
 				};
 				Relationships: [];
 			};
@@ -40,7 +40,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
-			[_ in never]: never;
+			answerTypes: "positive" | "neutral" | "negative" | "other";
 		};
 		CompositeTypes: {
 			[_ in never]: never;
@@ -170,6 +170,8 @@ export type CompositeTypes<
 
 export const Constants = {
 	public: {
-		Enums: {}
+		Enums: {
+			answerTypes: ["positive", "neutral", "negative", "other"]
+		}
 	}
 } as const;
