@@ -20,7 +20,7 @@ export type DBanswerType = {
 	count: number;
 };
 
-export async function RandomRow(): Promise<DBanswerType> {
+export async function RandomAnswer(): Promise<DBanswerType> {
 	const { data: fetchArray, error: fetchError } = await supabase
 		.from<"answers", DBanswerType>("answers")
 		.select("*");

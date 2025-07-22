@@ -1,7 +1,7 @@
 import { Err } from "@/data/types";
 import { failOptions, successOptions } from "@/app/v2/headers";
 import { errorJSON, getAnswerJSON } from "@/app/v2/responses";
-import { RandomRow } from "@/utils/supabaseClient";
+import { RandomAnswer } from "@/utils/supabaseClient";
 
 /**
  * @example ```/answers```
@@ -9,7 +9,7 @@ import { RandomRow } from "@/utils/supabaseClient";
 export async function GET(): Promise<Response> {
 	try {
 		return new Response(
-			getAnswerJSON(await RandomRow()),
+			getAnswerJSON(await RandomAnswer()),
 			successOptions("Here's your answer")
 		);
 	} catch (error: unknown) {
