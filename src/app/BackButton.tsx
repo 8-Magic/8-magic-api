@@ -4,7 +4,9 @@ import { usePathname } from "next/navigation";
 
 export default function BackButton(): React.ReactNode {
 	const answer = randomAnswer();
-	return usePathname() !== "/" ? (
+	const path = usePathname();
+	if (path.includes("/audit_log")) return;
+	return path !== "/" ? (
 		<button
 			onClick={() =>
 				(window.location.href =
