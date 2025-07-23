@@ -12,11 +12,14 @@ export function errorJSON(error: unknown): string {
 	return JSON.stringify(
 		{
 			status: "fail",
-			"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
+			"why?":
+				code !== undefined
+					? `${code} ${errorCodeToText(code ?? undefined)}`
+					: "honestly IDK",
 			type,
 			message: message || "An unknown error occurred",
-			details,
-			cause
+			details: details || "No details specified for this error",
+			cause: cause || "No cause specified for this error"
 		},
 		null,
 		2

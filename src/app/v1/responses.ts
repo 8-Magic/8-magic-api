@@ -7,14 +7,18 @@ import { errorCodeToText } from "./headers";
  * @returns {string} JSON string response containing details about error.
  */
 export function errorJSON(error: unknown): string {
-	const { type, message, cause, code } = error as Err;
+	const { type, message, cause, code, details } = error as Err;
 	return JSON.stringify(
 		{
 			status: "fail",
-			"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
+			"why?":
+				code !== undefined
+					? `${code} ${errorCodeToText(code ?? undefined)}`
+					: "honestly IDK",
 			type,
 			message: message || "An unknown error occurred",
-			cause
+			details: details || "No details specified for this error",
+			cause: cause || "No cause specified for this error"
 		},
 		null,
 		2
