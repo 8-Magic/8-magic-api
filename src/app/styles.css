@@ -4,6 +4,11 @@ body {
 	@apply bg-stone-950 text-stone-200;
 }
 
+.font-mono {
+	--font-mono: "Jetbrains Mono";
+	font-family: var(--font-mono);
+}
+
 .header-1 {
 	@apply text-3xl font-bold;
 }
