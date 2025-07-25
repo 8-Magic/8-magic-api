@@ -5,13 +5,14 @@ import { getAllAnswers } from "@/utils/supabaseClient";
 import { NextRequest } from "next/server";
 
 /**
- * @example ```/answers```
+ * @example ```/answers?t=positive```
  */
 export async function GET(req: NextRequest): Promise<Response> {
 	const type: string =
 		new URL(req.url).searchParams.get("type")?.trim()?.toLowerCase() ||
 		new URL(req.url).searchParams.get("t")?.trim()?.toLowerCase() ||
 		"all";
+	const answers = await getAllAnswers(type);
 
 	try {
 		return new Response(
@@ -20,7 +21,8 @@ export async function GET(req: NextRequest): Promise<Response> {
 					status: "success",
 					data: {
 						type,
-						answers: await getAllAnswers(type)
+						length: answers.length,
+						answers
 					}
 				},
 				null,
