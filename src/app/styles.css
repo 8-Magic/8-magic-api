@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 body {
+	font-family: var(--font-jetbrains), "Jetbrains Mono", var(--font-mono),
+		monospace;
 	@apply bg-stone-950 text-stone-200;
 }
 
@@ -25,7 +27,8 @@ body {
 }
 
 .endpoint::before {
-	@apply content-['Request:'] left-0 absolute text-base text-slate-300 hidden md:block;
+	@apply content-['Request:'] left-0 absolute
+	text-base text-slate-300 hidden md:block;
 }
 
 .code-block {
@@ -34,9 +37,10 @@ body {
 	font-[family-name:var(--font-jetbrains)];
 }
 
-.code-block::before {
+.code-block:not([aria-details="before-false"])::before {
 	@apply -top-8 px-2 py-1 content-['Response:_'] 
-	border-gray-500 border-1 bg-gray-950 -z-10 absolute text-base text-slate-300 hidden md:block;
+	border-gray-500 border-1 bg-gray-950 -z-10
+	absolute text-base text-slate-300 hidden md:block;
 }
 
 .grayit {
