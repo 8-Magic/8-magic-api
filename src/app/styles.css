@@ -4,9 +4,8 @@ body {
 	@apply bg-stone-950 text-stone-200;
 }
 
-.font-mono {
-	--font-mono: "Jetbrains Mono";
-	font-family: var(--font-mono);
+.mono {
+	font-family: var(--font-jetbrains), "Jetbrains Mono";
 }
 
 .header-1 {
@@ -42,4 +41,8 @@ body {
 
 .grayit {
 	@apply italic text-gray-400;
+}
+
+.code-line {
+	@apply px-1 bg-slate-800;
 }
