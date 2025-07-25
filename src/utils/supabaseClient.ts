@@ -100,7 +100,7 @@ export async function getAllAnswers(
 		const { data, error: fetchError } = await supabase
 			.from("answers")
 			.select("*")
-			.order("id", { ascending: true })
+			.order("id")
 			.eq("type", type);
 
 		const fetchArray = data as DBanswerType[];
@@ -117,7 +117,8 @@ export async function getAllAnswers(
 		if (type === "all") {
 			const { data, error: fetchError } = await supabase
 				.from("answers")
-				.select("*");
+				.select("*")
+				.order("id");
 
 			const fetchArray = data as DBanswerType[];
 
