@@ -151,7 +151,13 @@ export async function getAllAnswersLength(): Promise<{
 		.select("*")
 		.order("id", { ascending: true });
 
-	if (error) throw error;
+	if (error)
+		throw new Err({
+			message: "Error while fetching data length from database",
+			type: "UNKNOWN_ERR",
+			cause: "getAllAnswersLength() on /src/utils/supabaseClient.ts",
+			details: error.message
+		});
 
 	let positive = 0,
 		neutral = 0,
