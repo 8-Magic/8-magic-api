@@ -1,8 +1,9 @@
-import { Err } from "@/data/types";
+import { Err, answerType, answerTypes } from "@/data/types";
 import { failOptions, successOptions } from "@/app/v2/headers";
 import { errorJSON } from "@/app/v2/responses";
 import { getAllAnswers } from "@/utils/supabaseClient";
 import { NextRequest } from "next/server";
+import JSONstring from "@/utils/JSON";
 
 /**
  * @example ```/answers?t=positive```
@@ -12,11 +13,24 @@ export async function GET(req: NextRequest): Promise<Response> {
 		new URL(req.url).searchParams.get("type")?.trim()?.toLowerCase() ||
 		new URL(req.url).searchParams.get("t")?.trim()?.toLowerCase() ||
 		"all";
-	const answers = await getAllAnswers(type);
 
 	try {
+		if (
+			(type as answerType) !== answerTypes.positive &&
+			(type as answerType) !== answerTypes.neutral &&
+			(type as answerType) !== answerTypes.negative &&
+			(type as answerType) !== answerTypes.all
+		)
+			throw new Err({
+				type: "REQ_ERR",
+				message: "Requested type is invaild.",
+				code: 400
+			});
+
+		const answers = await getAllAnswers(type);
+
 		return new Response(
-			JSON.stringify(
+			JSONstring(
 				{
 					status: "success",
 					data: {
