@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import supabase from "@/utils/supabaseClient";
 import { RealtimeChannel } from "@supabase/supabase-js";
+import JSONstring from "@/utils/JSON";
 
 type AuditLogRow = {
 	id: string; // uuid
@@ -119,13 +120,13 @@ export default function AuditLogPage() {
 							{log.data_before && (
 								<>
 									<div className="text-yellow-500">Before:</div>
-									<pre>{JSON.stringify(log.data_before, null, 2)}</pre>
+									<pre>{JSONstring(log.data_before)}</pre>
 								</>
 							)}
 							{log.data_after && (
 								<>
 									<div className="text-green-400">After:</div>
-									<pre>{JSON.stringify(log.data_after, null, 2)}</pre>
+									<pre>{JSONstring(log.data_after)}</pre>
 								</>
 							)}
 						</div>

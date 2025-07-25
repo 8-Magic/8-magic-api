@@ -3,6 +3,7 @@ import { answerType } from "@/data/types";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { Err } from "@/data/types";
 import { randomElement } from "./randomAnswer";
+import JSONstring from "./JSON";
 
 const supabase: SupabaseClient = createClient<Database, "public">(
 	process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -114,29 +115,21 @@ export async function getAllAnswers(
 
 		return fetchArray;
 	} else {
-		if (type === "all") {
-			const { data, error: fetchError } = await supabase
-				.from("answers")
-				.select("*")
-				.order("id");
+		const { data, error: fetchError } = await supabase
+			.from("answers")
+			.select("*")
+			.order("id");
 
-			const fetchArray = data as DBanswerType[];
+		const fetchArray = data as DBanswerType[];
 
-			if (fetchError)
-				throw new Err({
-					message: "Error while fetching data from database",
-					type: "UNKNOWN_ERR",
-					details: fetchError.message
-				});
-
-			return fetchArray;
-		} else
+		if (fetchError)
 			throw new Err({
-				message: "Requested type is invalid",
-				type: "REQ_ERR",
-				code: 400,
-				cause: "getAnswerbyType() on /src/utils/supabaseClient.ts"
+				message: "Error while fetching data from database",
+				type: "UNKNOWN_ERR",
+				details: fetchError.message
 			});
+
+		return fetchArray;
 	}
 }
 
@@ -183,7 +176,7 @@ export async function getAllAnswersLength(): Promise<{
 					type: "SERV_ERR",
 					code: 500,
 					cause: "getAllAnswersLength() on /src/utils/supabaseClient.ts",
-					details: JSON.stringify(answerObject, null, 4)
+					details: JSONstring(answerObject)
 				});
 			}
 		}
