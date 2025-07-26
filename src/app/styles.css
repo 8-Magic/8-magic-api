@@ -56,3 +56,11 @@ body {
 .code-line {
 	@apply px-1 bg-slate-800;
 }
+
+.blockquote {
+	@apply border-l-2 border-red-500 pl-4;
+}
+
+.blockquote .header-2 {
+	@apply text-red-500;
+}

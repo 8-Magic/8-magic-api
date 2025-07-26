@@ -10,18 +10,16 @@ export default async function Page() {
 	return (
 		<>
 			<h1 className="header-1">API version 2</h1>
+			<blockquote className="blockquote" id="attention">
+				<h2 className="header-2">Attention: v1 is more stable</h2>
+				<p>
+					This version is not experimental or in development, but it&apos;s not
+					as stable as v1. We recommend you to use v1, but you can still use v2.
+				</p>
+			</blockquote>
 			<p>
-				This version is not exprimental or in development, but it&apos;s not as
-				fully stable as v1. We recommend you to use v1 as it&apos;s more stable,
-				but you can still use it. We&apos;re using{" "}
-				<Link href="https://supabase.com" className="link">
-					Supabase
-				</Link>{" "}
-				as database provider.
-			</p>
-			<p>
-				This can help us to see more info (like how many times our API is being
-				used) and to have many more answer entries (which right now is{" "}
+				Using a database helps us to see more info (like how many times our API
+				is being used) and to have many more answer entries (which right now is{" "}
 				<Link href="/v2/answers/all" className="link">
 					{(await getAllAnswersLength()).all} answers
 				</Link>
