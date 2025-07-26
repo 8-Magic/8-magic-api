@@ -4,6 +4,7 @@ import { errorJSON } from "@/app/v1/responses";
 import { getTypeAnswers } from "@/app/v1/functions";
 import { getTypeLength } from "@/data/answers";
 import { answerType, answerTypes, Err } from "@/data/types";
+import JSONstring from "@/utils/JSON";
 
 /**
  *
@@ -35,18 +36,14 @@ export async function GET(req: NextRequest): Promise<Response> {
 			});
 
 		return new Response(
-			JSON.stringify(
-				{
-					status: "success",
-					data: {
-						type,
-						number: number !== 0 ? number : getTypeLength(type),
-						answers: getTypeAnswers(type, number)
-					}
-				},
-				null,
-				2
-			),
+			JSONstring({
+				status: "success",
+				data: {
+					type,
+					number: number !== 0 ? number : getTypeLength(type),
+					answers: getTypeAnswers(type, number)
+				}
+			}),
 			successOptions("Got the answers")
 		);
 	} catch (error: unknown) {

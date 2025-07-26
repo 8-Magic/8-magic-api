@@ -5,7 +5,8 @@ import BackButton from "./BackButton";
 
 const mono = JetBrains_Mono({
 	subsets: ["latin"],
-	display: "swap"
+	display: "swap",
+	variable: "--font-jetbrains"
 });
 
 export const metadata: Metadata = {

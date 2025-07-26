@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
 body {
+	font-family: var(--font-jetbrains), "Jetbrains Mono", var(--font-mono),
+		monospace;
 	@apply bg-stone-950 text-stone-200;
+}
+
+.mono {
+	font-family: var(--font-jetbrains), "Jetbrains Mono";
 }
 
 .header-1 {
@@ -21,20 +27,40 @@ body {
 }
 
 .endpoint::before {
-	@apply content-['Request:'] left-0 absolute text-base text-slate-300 hidden md:block;
+	@apply content-['Request:'] left-0 absolute
+	text-base text-slate-300 hidden md:block;
 }
 
-.code-block {
-	@apply px-4 py-2 text-sm mt-4 relative
-	border-gray-500 border-1 bg-gradient-to-r from-gray-950 to-slate-800
+.code-block[aria-details="before-false"] {
+	@apply px-4 py-2 text-sm border
+	border-gray-500 bg-gradient-to-r from-gray-950 to-slate-800
 	font-[family-name:var(--font-jetbrains)];
 }
 
-.code-block::before {
+.code-block:not([aria-details="before-false"]) {
+	@apply px-4 py-2 text-sm mt-4 relative
+	border-gray-500 border bg-gradient-to-r from-gray-950 to-slate-800
+	font-[family-name:var(--font-jetbrains)];
+}
+
+.code-block:not([aria-details="before-false"])::before {
 	@apply -top-8 px-2 py-1 content-['Response:_'] 
-	border-gray-500 border-1 bg-gray-950 -z-10 absolute text-base text-slate-300 hidden md:block;
+	border-gray-500 border bg-gray-950 -z-10
+	absolute text-base text-slate-300 hidden md:block;
 }
 
 .grayit {
 	@apply italic text-gray-400;
+}
+
+.code-line {
+	@apply px-1 bg-slate-800;
+}
+
+.blockquote {
+	@apply border-l-2 border-red-500 pl-4;
+}
+
+.blockquote .header-2 {
+	@apply text-red-500;
 }
