@@ -5,6 +5,9 @@ import supabase from "@/utils/supabaseClient";
 import { RealtimeChannel } from "@supabase/supabase-js";
 import JSONstring from "@/utils/JSON";
 
+/**
+ * Type definition for rows in audit log table
+ */
 type AuditLogRow = {
 	id: string; // uuid
 	action: string;
@@ -19,9 +22,16 @@ type AuditLogRow = {
 export default function AuditLogPage() {
 	const [logs, setLogs] = useState<AuditLogRow[]>([]);
 	const [isPaused, setIsPaused] = useState(false);
+	/**
+	 * Used for Supabase "audit-log-realtime" channel
+	 * @see handleResume
+	 */
 	const channelRef = useRef<RealtimeChannel | null>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 
+	/**
+	 * Starts the Supabase "audit-log-realtime" channel for live changes
+	 */
 	function handleResume() {
 		if (channelRef.current) return;
 
@@ -43,6 +53,9 @@ export default function AuditLogPage() {
 		channelRef.current = channel;
 	}
 
+	/**
+	 * "Pauses" Supabase channel by removing it
+	 */
 	function handlePause() {
 		if (channelRef.current) {
 			supabase.removeChannel(channelRef.current);
@@ -72,6 +85,11 @@ export default function AuditLogPage() {
 		}
 	}, [logs.length]);
 
+	/**
+	 * Handle's live pause onclick
+	 *
+	 * checks if the audit log live stream is already paused or not
+	 */
 	function togglePause() {
 		if (isPaused) {
 			handleResume();
