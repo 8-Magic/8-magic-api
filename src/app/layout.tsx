@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 	icons: {
 		icon: [{ url: "/logo.svg", type: "image/svg+xml" }]
 	},
-	referrer: "origin"
+	referrer: "origin-when-cross-origin"
 };
 
 export default async function RootLayout({
