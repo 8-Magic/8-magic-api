@@ -1,5 +1,10 @@
 import { Err, strObject, httpOptionsObject } from "@/data/types";
 
+/**
+ *
+ * @param {string} contentType Used to specify custom `"Content-Type"` in header
+ * @returns {strObject} Header object used in responses
+ */
 export const headers = (contentType: string): strObject => {
 	if (!contentType) {
 		throw new Err({
@@ -16,6 +21,11 @@ export const headers = (contentType: string): strObject => {
 	};
 };
 
+/**
+ *
+ * @param {number | string} code Used to determine what string it should return as error status.
+ * @returns {string} An error status message based on the input error code.
+ */
 export const errorCodeToText = (code?: number | string): string => {
 	if (typeof code === "string") code = parseInt(code);
 	if (code !== undefined)
@@ -41,6 +51,13 @@ export const errorCodeToText = (code?: number | string): string => {
 	else return "";
 };
 
+/**
+ *
+ * @param {string} message To specify custom success response status.
+ * @param {number} code To specify custom success response code.
+ * @param {string} contentType To specify custom `"Content-Type"` for response header.
+ * @returns {httpOptionsObject} HTTP response options, used in successful responses.
+ */
 export const successOptions = (
 	message: string = "Here's your answer",
 	code: number = 200,
@@ -53,6 +70,12 @@ export const successOptions = (
 	};
 };
 
+/**
+ *
+ * @param {number} code To specify custom error response code.
+ * @param {string} contentType To specify custom `"Content-Type"` for response header.
+ * @returns {httpOptionsObject} HTTP response options, used in failed responses.
+ */
 export const failOptions = (
 	code: number = 500,
 	contentType: string = "application/json"

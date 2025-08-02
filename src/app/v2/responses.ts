@@ -23,6 +23,11 @@ export function errorJSON(error: unknown): string {
 	});
 }
 
+/**
+ *
+ * @param {DBanswerType} Destructured Receives an answer object from database.
+ * @returns {string} formatted JSON string with answer object in data.
+ */
 export function getAnswerJSON({
 	id,
 	answer,
