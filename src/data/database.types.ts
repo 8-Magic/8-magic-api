@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This file is type definitions used by Supabase client.
+ */
+
 export type Json =
 	| string
 	| number

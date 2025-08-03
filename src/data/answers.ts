@@ -74,7 +74,12 @@ const allAnswers: answersArray = [
 	...negativeAnswers
 ];
 
-export function getTypeLength(type?: string): number {
+/**
+ *
+ * @param {string} type Specify answer type to receive array length.
+ * @returns {number} Array length of specified answer type.
+ */
+export function getTypeLength(type: string): number {
 	switch (type) {
 		case "positive":
 			return positiveAnswers.length;
