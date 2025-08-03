@@ -4,7 +4,7 @@ import { randomAnswer } from "@/utils/randomAnswer";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function BackButton(): React.ReactNode {
-	const answer = randomAnswer();
+	const { id, answer, type } = randomAnswer();
 
 	const router = useRouter();
 	const path = usePathname();
@@ -23,8 +23,8 @@ export default function BackButton(): React.ReactNode {
 			Go Back
 		</button>
 	) : (
-		<p className="text-stone-400" suppressHydrationWarning={true}>
-			{JSONstring(answer)}
+		<p className="text-stone-400 text-sm -mb-4" suppressHydrationWarning={true}>
+			{JSONstring({ id, answer, type }).slice(1, -1).trim()}
 		</p>
 	);
 }
