@@ -5,14 +5,20 @@ import allAnswers, {
 } from "@/data/answers";
 import { answersArray, answerTypes, Err } from "@/data/types";
 
-function getAllAnswers(arr: answersArray, n: number): answersArray {
-	if (n === 0 || !n) return arr;
+/**
+ *
+ * @param {answersArray} answerArray Source array to receive.
+ * @param {number} num Amount of items to receive from the source array.
+ * @returns {answersArray} Array of answers with specified amount.
+ */
+function getAllAnswers(answerArray: answersArray, num: number): answersArray {
+	if (num === 0 || !num) return answerArray;
 	else {
-		const shuffled: answersArray = arr.slice();
+		const shuffled: answersArray = answerArray.slice();
 
-		if (n > arr.length)
+		if (num > answerArray.length)
 			throw new RangeError(
-				`Requested number of elements exceeds array length (length: ${arr.length})`
+				`Requested number of elements exceeds array length (length: ${answerArray.length})`
 			);
 
 		for (let i: number = shuffled.length - 1; i > 0; i--) {
@@ -20,20 +26,26 @@ function getAllAnswers(arr: answersArray, n: number): answersArray {
 			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
 		}
 
-		return shuffled.slice(0, n);
+		return shuffled.slice(0, num);
 	}
 }
 
-export function getTypeAnswers(type: string, n: number): answersArray {
+/**
+ *
+ * @param {string} type Specify answer type to receive.
+ * @param {number} number Amount of objects to receive from the specified type.
+ * @returns {answersArray} Array of answers with specified amount.
+ */
+export function getTypeAnswers(type: string, number: number): answersArray {
 	switch (type) {
 		case answerTypes.positive:
-			return getAllAnswers(positiveAnswers, n);
+			return getAllAnswers(positiveAnswers, number);
 		case answerTypes.neutral:
-			return getAllAnswers(neutralAnswers, n);
+			return getAllAnswers(neutralAnswers, number);
 		case answerTypes.negative:
-			return getAllAnswers(negativeAnswers, n);
+			return getAllAnswers(negativeAnswers, number);
 		case answerTypes.all:
-			return getAllAnswers(allAnswers, n);
+			return getAllAnswers(allAnswers, number);
 		default:
 			throw new Err({
 				type: "REQ_ERR",
