@@ -3,6 +3,12 @@ import JSONstring from "@/utils/JSON";
 import { randomAnswer } from "@/utils/randomAnswer";
 import { useRouter, usePathname } from "next/navigation";
 
+/**
+ * @description A button which will take the user up directory in certain paths.
+ * @requires `/src/utils/randomAnswer`
+ * @requires `next/navigation/useRouter`
+ * @requires `next/navigation/usePathname`
+ */
 export default function BackButton(): React.ReactNode {
 	const { id, answer, type } = randomAnswer();
 
