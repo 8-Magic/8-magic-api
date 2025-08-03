@@ -5,6 +5,9 @@ import { Err } from "@/data/types";
 import { randomElement } from "./randomAnswer";
 import JSONstring from "./JSON";
 
+/**
+ * @description Supabase client, with public keys specified by default.
+ */
 const supabase: SupabaseClient = createClient<Database, "public">(
 	process.env.NEXT_PUBLIC_SUPABASE_URL!,
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -12,6 +15,9 @@ const supabase: SupabaseClient = createClient<Database, "public">(
 
 export default supabase;
 
+/**
+ * @description Type definition of answer objects from database (in v2).
+ */
 export type DBanswerType = {
 	id: number;
 	answer: string;
@@ -19,6 +25,9 @@ export type DBanswerType = {
 	count: number;
 };
 
+/**
+ * @returns {Promise<DBanswerType>} Promise for a random answer from database.
+ */
 export async function RandomAnswer(): Promise<DBanswerType> {
 	const { data: fetchArray, error: fetchError } = await supabase
 		.from<"answers", DBanswerType>("answers")
@@ -50,7 +59,11 @@ export async function RandomAnswer(): Promise<DBanswerType> {
 	return updated?.[0] as DBanswerType;
 }
 
-export async function getAnswerbyID(id: number) {
+/**
+ * @param {number} id Specify id of answer object you want from database
+ * @returns {Promise<DBanswerType>} Promise for an ID-specified answer object from database.
+ */
+export async function getAnswerbyID(id: number): Promise<DBanswerType> {
 	if (id && typeof id === "number") {
 		const { data, error: fetchError } = await supabase
 			.from("answers")
@@ -92,6 +105,11 @@ export async function getAnswerbyID(id: number) {
 		});
 }
 
+/**
+ *
+ * @param {string} type (Default: all) Used for specifying type of answers you want to receive
+ * @returns {Promise<DBanswerType[]>} A promise for an array of answers from a type
+ */
 export async function getAllAnswers(
 	type: answerType | string
 ): Promise<DBanswerType[]> {
@@ -133,6 +151,10 @@ export async function getAllAnswers(
 	}
 }
 
+/**
+ * Gets length of all answers in database.
+ * @returns {object} Object of all answer lengths, separated by types.
+ */
 export async function getAllAnswersLength(): Promise<{
 	all: number;
 	positive: number;
